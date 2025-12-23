@@ -1,5 +1,5 @@
 import express from "express";
-import users from "./routes/users.js"
+import students from "./routes/Students.js"
 
 
 const app = express();
@@ -16,12 +16,12 @@ app.use((req, res, next) => {
 // ================== ROUTES ===================
 app.get("/", async (req, res) => {
   res.json({
-    message: "Welcome to Todo List API",
+    message: "Welcome to Student and Course System API",
     version: "1.0.0",
   });
 });
 
-app.use("/users", users);
+app.use("/students", students);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);

@@ -41,8 +41,8 @@ export  async function readStudents() {
  }
 
 
-export  async function  writeStudents() { 
-    return await writeToFile('data/students.json')
+export  async function  writeStudents(data) { 
+    return await writeToFile('data/students.json',data)
 }
 
 
@@ -51,8 +51,8 @@ export  async function readCourses() {
  }
 
 
-export  async function  writeCourses() { 
-    return await writeToFile('data/courses.json')
+export  async function  writeCourses(data) { 
+    return await writeToFile('data/courses.json',data)
 }
 
 
