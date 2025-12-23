@@ -89,8 +89,8 @@ export const DelCurse = async (req, res) => {
     const index = corseslist.findIndex((s) => s.id == id);
     corseslist.splice(index, 1);
     await writeCourses(corseslist);
-    res.status(200).send({});
+    res.status(200).send({d});
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({err});
   }
 };
