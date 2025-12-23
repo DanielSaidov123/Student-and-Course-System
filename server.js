@@ -1,5 +1,7 @@
 import express from "express";
 import students from "./routes/Students.js"
+import courses from "./routes/Courses.js"
+
 
 
 const app = express();
@@ -22,6 +24,8 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/students", students);
+app.use("/courses", courses);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
