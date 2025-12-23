@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DanielSaidov123/Student-and-Course-System.git",
-    "dev": "nodemon server.js"
+    "url": "git+https://github.com/DanielSaidov123/Student-and-Course-System.git"
+
   },
   "keywords": [],
   "author": "",
