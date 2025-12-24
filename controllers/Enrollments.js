@@ -91,3 +91,35 @@ export const GetCursesOfStudent = async (req, res) => {
     res.status(500).send({ err });
   }
 };
+
+export const GetStudentOfCurses = async (req, res) => {
+  try {
+    const curseid = req.params.courseId;
+    const curseslist = await readCourses();
+    const studentlist = await readStudents();
+    const curse = curseslist.find((c) => c.id == curseid);
+    if (!curse) {
+      return res.status(404).send({ msg: "curse is not defind." });
+    }
+   
+    const arr = [];
+    for (let i = 0; i < studentlist.length; i++) {
+      for (let j = 0; j < studentlist[i].enrolledCourses.length; j++) {
+
+        if ( studentlist[i].enrolledCourses[j] === curse.id) {
+            console.log(arr);
+            
+          arr.push(studentlist[i]);
+        }
+      }
+    }
+    if (arr.length === 0) {
+      return res
+        .status(404)
+        .send({ msg: "No one is registered for this course." });
+    }
+    res.status(200).send({ msg: arr});
+  } catch (err) {
+    res.status(500).send({ err });
+  }
+};
