@@ -1,8 +1,8 @@
 [
   {
-    "id": 1,
-    "name": "JavaScript for Beginners",
-    "instructor": "David Smith",
-    "credits": 4
+    "id": 2,
+    "name": "daniel",
+    "email": "johne.com",
+    "enrolledCourses": [4,1]
   }
 ]

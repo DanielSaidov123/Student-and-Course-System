@@ -31,6 +31,9 @@ export const GetStudent = async (req, res) => {
 export const CreateStudent = async (req, res) => {
   try {
     const studentlist = await readStudents();
+    if (!req.body.name || !req.body.email) {
+      res.status(404).send({ err });
+    }
     const newStudent = {
       id: getNextId(studentlist),
       name: req.body.name,
@@ -41,7 +44,7 @@ export const CreateStudent = async (req, res) => {
     await writeStudents(studentlist);
     res.status(200).send(newStudent);
   } catch (err) {
-    res.status(404).send(err);
+    res.status(404).send({ err });
   }
 };
 
@@ -49,7 +52,7 @@ export const updatingSstudent = async (req, res) => {
   try {
     const id = req.params.id;
     const studentlist = await readStudents();
-    
+
     const student = studentlist.find((s) => s.id == id);
     if (!student) {
       return res.status(404).send({ msg: "student is not defind." });
@@ -70,7 +73,7 @@ export const updatingSstudent = async (req, res) => {
   }
 };
 
-export const DelStudent=async (req, res) => {
+export const DelStudent = async (req, res) => {
   try {
     const id = req.params.id;
     const studentlist = await readStudents();
@@ -78,10 +81,10 @@ export const DelStudent=async (req, res) => {
     if (!student) {
       return res.status(404).send({ msg: "student is not defind." });
     }
-    const index=studentlist.findIndex((s) => s.id == id)
-    studentlist.splice(index,1)
+    const index = studentlist.findIndex((s) => s.id == id);
+    studentlist.splice(index, 1);
     await writeStudents(studentlist);
-    res.status(200).send( {});
+    res.status(200).send({});
   } catch (err) {
     res.status(500).send(err);
   }

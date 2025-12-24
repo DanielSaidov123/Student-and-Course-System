@@ -10,7 +10,7 @@ export const GetCurses = async (req, res) => {
   try {
     res.status(200).send(await readCourses());
   } catch (err) {
-    res.status(500).send({err});
+    res.status(500).send({ err });
   }
 };
 
@@ -73,24 +73,29 @@ export const updatingCurse = async (req, res) => {
 export const DelCurse = async (req, res) => {
   try {
     const id = req.params.id;
-    const corseslist = await readStudents();
-    const curse = corseslist.find((s) => s.id == id);
+    const corseslist = await readCourses();
+    const curse = corseslist.find((c) => c.id == id);
+
     if (!curse) {
       return res.status(404).send({ msg: "curse is not defind." });
     }
-    const isUsed = students.some((s) => Array.isArray(s.enrolledCourses) && s.enrolledCourses.includes(id)
-    );
-
-    if (isUsed) {
-      return res.status(400).send({
-        msg: "cannot delete course – students are registered",
-      });
+    const studentslist = await readStudents();
+    for (let i = 0; i < corseslist.length; i++) {
+      for (let j = 0; j < studentslist.length; j++) {
+        for (let g = 0; g < studentslist[j].enrolledCourses.length; g++) {          
+          if (studentslist[j].enrolledCourses[g] === corseslist[i].credits) {
+            return res
+              .status(400)
+              .send({ msg: "cannot delete course – students are registered" });
+          }
+        }
+      }
     }
     const index = corseslist.findIndex((s) => s.id == id);
     corseslist.splice(index, 1);
     await writeCourses(corseslist);
-    res.status(200).send({d});
+    res.status(200).send({});
   } catch (err) {
-    res.status(500).send({err});
+    res.status(500).send({ err });
   }
 };
