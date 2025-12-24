@@ -83,7 +83,7 @@ export const DelCurse = async (req, res) => {
     for (let i = 0; i < corseslist.length; i++) {
       for (let j = 0; j < studentslist.length; j++) {
         for (let g = 0; g < studentslist[j].enrolledCourses.length; g++) {          
-          if (studentslist[j].enrolledCourses[g] === corseslist[i].credits) {
+          if (studentslist[j].enrolledCourses[g] === corseslist[i].id) {
             return res
               .status(400)
               .send({ msg: "cannot delete course – students are registered" });
